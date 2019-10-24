@@ -68,13 +68,7 @@ public class LoginGui{//实现监听器的接口
     public void show(){
         frame.setBounds(500,500,350,250);//设置大小
         frame.setLayout(new FlowLayout());//设置流式布局
-    }
-
-    public static void main(String args[])
-	{
-    	LoginGui login = new LoginGui();
-	}
-    
+    }  
 }
     
     
