@@ -1,4 +1,4 @@
-package team.atm.menu;
+package pers.atm.menu;
 
 public class BankStaffOperationMenu {
 

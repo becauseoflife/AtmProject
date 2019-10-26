@@ -1,4 +1,4 @@
-package team.atm.user;
+package pers.atm.user;
 
 public class AuthorizedBankStaff {
 	public String bankStaffId;				// ÊÚÈ¨ÈËÔ±ºÅ

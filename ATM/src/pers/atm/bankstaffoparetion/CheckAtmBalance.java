@@ -1,4 +1,4 @@
-package team.atm.bankstaffoparetion;
+package pers.atm.bankstaffoparetion;
 
 public class CheckAtmBalance {
 

@@ -1,4 +1,4 @@
-package team.atm.user;
+package pers.atm.user;
 
 import java.io.Serializable;
 
@@ -11,6 +11,8 @@ public class User implements Serializable{
 	private String userAccountNumber;	// 用户账号
 	private String userPassword;			// 用户密码
 	private Double money;				// 用户余额
+	
+	public User(){};
 	
 	public User(String bankName, String userName, String userAccountNumber, String userPassword,
 			Double money) {
