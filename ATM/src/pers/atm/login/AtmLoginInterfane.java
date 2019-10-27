@@ -23,12 +23,13 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import pers.atm.menu.ThisBankClientMenu;
-import pers.atm.setgetuserfile.SetAndGetUserFile;
+import pers.atm.setgetuserfile.SetAndGetDataFile;
 import pers.atm.user.User;
+import pers.atm.useroperation.inputlimitclass.NumberLenghtLimitedDmt;
 
 public class AtmLoginInterfane {
 
-	public JFrame loginJFrame;
+	private JFrame loginJFrame;
 	private String bankName;
 	
 	public AtmLoginInterfane(String bankName) {
@@ -36,8 +37,6 @@ public class AtmLoginInterfane {
 		this.bankName = bankName;
 	}
 
-	public AtmLoginInterfane(){};
-	
 	// 用户登录界面
 	public void loginInterface()
 	{
@@ -46,7 +45,7 @@ public class AtmLoginInterfane {
 		
 		// 登录logo
 		JPanel bankNamePanel = new JPanel();
-		bankNamePanel.add(new JLabel(getBankName()));
+		bankNamePanel.add(new JLabel(bankName));
 		
 		// 用户账号输入框
 		JPanel userAccountPanle = new JPanel();
@@ -54,6 +53,7 @@ public class AtmLoginInterfane {
 		userAccountJLabel.setPreferredSize(new Dimension(120, 20));
 		userAccountPanle.add(userAccountJLabel);
 		JTextField userAccount = new JTextField(20);
+		userAccount.setDocument(new NumberLenghtLimitedDmt(7));	// 只能输入7位数字
 		userAccountPanle.add(userAccount);
 		
 		// 用户密码输入框
@@ -106,18 +106,16 @@ public class AtmLoginInterfane {
 				}
 				
 				//检查用户账号密码
-				String filePath = "UserData/" + inputAccuontString + ".txt";
-				File userFile = new File(filePath);
+				SetAndGetDataFile useroutputFile = new SetAndGetDataFile();
 				// 用户不存在
-				if (!userFile.exists()) {
+				if (useroutputFile.readUserInputFile(inputAccuontString) == null) {
 					JOptionPane.showMessageDialog(loginJFrame, "用户账号不存在，请先注册！");
 					// 账号密码输入框置空
 					userAccount.setText("");
 					userPassword.setText("");
 				}else{
 				// 打开用户文件，检测输入的密码
-					SetAndGetUserFile outputFile = new SetAndGetUserFile();
-					User user = outputFile.readObjectInputFile(userFile);
+					User user = useroutputFile.readUserInputFile(inputAccuontString);
 					
 
 					// System.out.println("用户的账号： " + user.getUserAccountNumber());
@@ -134,7 +132,7 @@ public class AtmLoginInterfane {
 						
 						loginJFrame.setVisible(false);  // 隐藏登录界面
 						// 跳转至功能菜单界面
-						ThisBankClientMenu menu = new ThisBankClientMenu();
+						ThisBankClientMenu menu = new ThisBankClientMenu(user, bankName);
 						menu.setThisBankMenu();
 						
 					}else {
@@ -152,7 +150,7 @@ public class AtmLoginInterfane {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				loginJFrame.setVisible(false); 			// 登录界面消失
-				AtmRegisteredInterface registeredInterface = new AtmRegisteredInterface(getBankName());		  // 创建注册界面
+				AtmRegisteredInterface registeredInterface = new AtmRegisteredInterface(bankName);		  // 创建注册界面
 				// registeredInterface.bankName = getBankName();   // 银行名称传给注册界面
 				// registeredInterface.carId = getCardId();		// 银行注册卡号传给注册界面
 				registeredInterface.registeredInterface();		// 展示用户登录界面
@@ -160,14 +158,6 @@ public class AtmLoginInterfane {
 			}
 		});
 		
-	}
-	
-	public String getBankName() {
-		return bankName;
-	}
-
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
 	}
 
 }

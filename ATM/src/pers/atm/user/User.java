@@ -10,18 +10,20 @@ public class User implements Serializable{
 	private String userName;				// 用户名
 	private String userAccountNumber;	// 用户账号
 	private String userPassword;			// 用户密码
-	private Double money;				// 用户余额
+	private Double availableBalances;	// 用户可用余额
+	private Double unAvailableBlances;	// 不可用余额
 	
 	public User(){};
 	
 	public User(String bankName, String userName, String userAccountNumber, String userPassword,
-			Double money) {
+			Double availableBalances, Double unavailableBlances) {
 		super();
 		this.bankName = bankName;
 		this.userName = userName;
 		this.userAccountNumber = userAccountNumber;
 		this.userPassword = userPassword;
-		this.money = money;
+		this.availableBalances = availableBalances;
+		this.unAvailableBlances = unavailableBlances;
 	}
 
 	public String getBankName() {
@@ -56,14 +58,22 @@ public class User implements Serializable{
 		this.userPassword = userPassword;
 	}
 
-	public Double getMoney() {
-		return money;
+	public Double getAvailableBalances() {
+		return availableBalances;
 	}
 
-	public void setMoney(Double money) {
-		this.money = money;
+	public void setAvailableBalances(Double money) {
+		this.availableBalances = money;
 	}
 
+	public Double getUnavailableBlances() {
+		return unAvailableBlances;
+	}
+
+	public void setUnavailableBlances(Double unavailableBlances) {
+		unAvailableBlances = unavailableBlances;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

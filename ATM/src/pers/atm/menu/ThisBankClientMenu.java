@@ -13,12 +13,28 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import pers.atm.login.AtmLoginInterfane;
+import pers.atm.setgetuserfile.SetAndGetDataFile;
+import pers.atm.user.MyAtm;
+import pers.atm.user.User;
+import pers.atm.useroperation.ChangePassword;
+import pers.atm.useroperation.CheckBalances;
+import pers.atm.useroperation.SaveMoney;
+import pers.atm.useroperation.TransferMoney;
+import pers.atm.useroperation.WithdrawMoney;
 
 public class ThisBankClientMenu {
-	public JFrame thisBankMenuJFrame;
-	
+	private JFrame thisBankMenuJFrame;
+	private User user;
+	private String bankName;
+
+	public ThisBankClientMenu(User user, String bankName) {
+		super();
+		this.user = user;
+		this.bankName = bankName;
+	}
+
 	public void setThisBankMenu(){
-		thisBankMenuJFrame = new JFrame();
+		thisBankMenuJFrame = new JFrame(bankName + " Operations");
 		thisBankMenuJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		//标签
@@ -68,6 +84,9 @@ public class ThisBankClientMenu {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				
+				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				// 创建余额查询界面
+				new CheckBalances(user, bankName).CheckMoneyInterface();	
 			}
 		});
 		
@@ -77,7 +96,9 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				
+				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				// 创建存钱界面
+				new SaveMoney(user, bankName).SaveMoneyInterface();
 			}
 		});
 		
@@ -87,7 +108,9 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				
+				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				// 创建取钱界面
+				new WithdrawMoney(user, bankName).outMoneyInterface();
 			}
 		});
 		
@@ -97,7 +120,9 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				
+				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				// 创建转账界面
+				new TransferMoney(user, bankName).TransferMoneyInterface();
 			}
 		});
 		
@@ -107,7 +132,9 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				
+				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				// 创建修改密码界面
+				new ChangePassword(user, bankName).ChangPasswordInterface();
 			}
 		});
 		
@@ -117,7 +144,7 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				AtmLoginInterfane login = new AtmLoginInterfane();
+				AtmLoginInterfane login = new AtmLoginInterfane(bankName);
 				thisBankMenuJFrame.setVisible(false);  // 隐藏功能界面
 				login.loginInterface();     // 显示登录界面
 			}
