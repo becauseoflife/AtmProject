@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import pers.atm.menu.OtherBankClientMenu;
 import pers.atm.menu.ThisBankClientMenu;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
 import pers.atm.user.User;
@@ -53,7 +54,7 @@ public class TransferMoney {
 		// 确认和返回按钮
 		JPanel buttonJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10));
 		JButton transferJButton = new JButton("Transfer");
-		JButton backJButton = new JButton("Back");
+		JButton backJButton = new JButton("Cancle");
 		buttonJPanel.add(transferJButton);
 		buttonJPanel.add(backJButton);
 		
@@ -128,14 +129,20 @@ public class TransferMoney {
 				
 				// 记录用户的操作
 				String opString = "Received " + transMoney + " yuan from "+ user.getUserAccountNumber()+" User transfers";
-				uFile.saveOperationData(transferUser.getUserAccountNumber(), opString);
+				uFile.saveOperationData(transferUser, opString);
 				
 				opString = "Transfer " + transMoney +" yuan to " + transferUser.getUserAccountNumber() + " User";
-				uFile.saveOperationData(user.getUserAccountNumber(), opString);
+				uFile.saveOperationData(user, opString);
 				
 				JOptionPane.showMessageDialog(transferMoneyJFrame, "seccussed!");
 				transferMoneyJFrame.setVisible(false); //隐藏此界面
-				new ThisBankClientMenu(user, bankName).setThisBankMenu(); // 返回操作界面
+
+				// 返回操作界面
+				if (user.getBankName().equals(bankName)) {
+					new ThisBankClientMenu(user, bankName).setThisBankMenu();	// 本银行操作界面
+				}else {
+					new OtherBankClientMenu(user, bankName).setOtherBankMenu(); // 其他银行操作界面
+				}
 
 			}
 		});
@@ -147,7 +154,13 @@ public class TransferMoney {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				transferMoneyJFrame.setVisible(false); //隐藏此界面
-				new ThisBankClientMenu(user, bankName).setThisBankMenu(); // 显示操作界面
+					
+				// 返回操作界面
+				if (user.getBankName().equals(bankName)) {
+					new ThisBankClientMenu(user, bankName).setThisBankMenu();	// 本银行操作界面
+				}else {
+					new OtherBankClientMenu(user, bankName).setOtherBankMenu(); // 其他银行操作界面
+				}
 			}
 		});
 		

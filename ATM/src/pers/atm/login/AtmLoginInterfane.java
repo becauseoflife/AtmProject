@@ -22,6 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import pers.atm.menu.OtherBankClientMenu;
 import pers.atm.menu.ThisBankClientMenu;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
 import pers.atm.user.User;
@@ -132,8 +133,16 @@ public class AtmLoginInterfane {
 						
 						loginJFrame.setVisible(false);  // 隐藏登录界面
 						// 跳转至功能菜单界面
-						ThisBankClientMenu menu = new ThisBankClientMenu(user, bankName);
-						menu.setThisBankMenu();
+						// 判断是否是此银行的用户
+						if (user.getBankName().equals(bankName)) {
+							// 创建本银行的用户界面
+							ThisBankClientMenu menu = new ThisBankClientMenu(user, bankName);
+							menu.setThisBankMenu();
+						}else {
+							// 创建非本银行人员的用户界面
+							new OtherBankClientMenu(user, bankName).setOtherBankMenu();
+						}
+						
 						
 					}else {
 						JOptionPane.showMessageDialog(loginJFrame, "密码错误，请重新输入！");

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+import pers.atm.menu.OtherBankClientMenu;
 import pers.atm.menu.ThisBankClientMenu;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
 import pers.atm.user.MyAtm;
@@ -94,7 +95,11 @@ public class CheckBalances {
 				// TODO 自动生成的方法存根
 				checkBalancesJFrame.setVisible(false); // 隐藏当前窗口
 				// 返回操作界面
-				new ThisBankClientMenu(user, bankName).setThisBankMenu();
+				if (user.getBankName().equals(bankName)) {
+					new ThisBankClientMenu(user, bankName).setThisBankMenu();	// 本银行操作界面
+				}else {
+					new OtherBankClientMenu(user, bankName).setOtherBankMenu(); // 其他银行操作界面
+				}
 			}
 		});
 		

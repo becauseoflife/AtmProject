@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import pers.atm.menu.OtherBankClientMenu;
 import pers.atm.menu.ThisBankClientMenu;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
 import pers.atm.user.MyAtm;
@@ -47,7 +48,7 @@ public class WithdrawMoney {
 		// 确认和返回按钮
 		JPanel buttonJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 20));
 		JButton withdrawalJButton = new JButton("withdrawal");
-		JButton backJButton = new JButton("Back");
+		JButton backJButton = new JButton("Cancle");
 		buttonJPanel.add(withdrawalJButton);
 		buttonJPanel.add(backJButton);
 		
@@ -104,11 +105,17 @@ public class WithdrawMoney {
 				
 				// 保存操作信息
 				String opString = "Take out " + outMoney + " yuan";
-				uFlie.saveOperationData(user.getUserAccountNumber(), opString);
+				uFlie.saveOperationData(user, opString);
 				
 				JOptionPane.showMessageDialog(outMoneyJFrame, "Successed!");
 				outMoneyJFrame.setVisible(false);  // 隐藏此界面
-				new ThisBankClientMenu(user, bankName).setThisBankMenu();  // 返回操作界面
+
+				// 返回操作界面
+				if (user.getBankName().equals(bankName)) {
+					new ThisBankClientMenu(user, bankName).setThisBankMenu();	// 本银行操作界面
+				}else {
+					new OtherBankClientMenu(user, bankName).setOtherBankMenu(); // 其他银行操作界面
+				}
 			}
 		});
 		
@@ -119,8 +126,13 @@ public class WithdrawMoney {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				outMoneyJFrame.setVisible(false);  // 隐藏此界面
+				
 				// 返回操作界面
-				new ThisBankClientMenu(user, bankName).setThisBankMenu();
+				if (user.getBankName().equals(bankName)) {
+					new ThisBankClientMenu(user, bankName).setThisBankMenu();	// 本银行操作界面
+				}else {
+					new OtherBankClientMenu(user, bankName).setOtherBankMenu(); // 其他银行操作界面
+				}
 			}
 		});
 		

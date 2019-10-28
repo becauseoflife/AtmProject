@@ -2,7 +2,6 @@ package pers.atm.menu;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,30 +13,26 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import pers.atm.login.AtmLoginInterfane;
-import pers.atm.setgetuserfile.SetAndGetDataFile;
-import pers.atm.user.MyAtm;
 import pers.atm.user.User;
-import pers.atm.useroperation.ChangePassword;
 import pers.atm.useroperation.CheckBalances;
 import pers.atm.useroperation.SaveMoney;
 import pers.atm.useroperation.TransferMoney;
-import pers.atm.useroperation.ViewWaterBill;
 import pers.atm.useroperation.WithdrawMoney;
 
-public class ThisBankClientMenu {
-	private JFrame thisBankMenuJFrame;
+public class OtherBankClientMenu {
+	private JFrame otherBankMenuJFrame;
 	private User user;
 	private String bankName;
 
-	public ThisBankClientMenu(User user, String bankName) {
+	public OtherBankClientMenu(User user, String bankName) {
 		super();
 		this.user = user;
 		this.bankName = bankName;
 	}
 
-	public void setThisBankMenu(){
-		thisBankMenuJFrame = new JFrame(bankName + " Operations");
-		thisBankMenuJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	public void setOtherBankMenu(){
+		otherBankMenuJFrame = new JFrame(bankName + " Operations");
+		otherBankMenuJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		//标签
 		JPanel tipJPanel = new JPanel();
@@ -48,8 +43,6 @@ public class ThisBankClientMenu {
 		JButton saveMoneyJButton = new JButton("Save Money");
 		JButton getMoneyJButton = new JButton("Withdraw Money");
 		JButton transferMoneyJButton = new JButton("Transfer Money");
-		JButton changePasswordJButton = new JButton("Change Password");
-		JButton viewWaterBillJButton = new JButton("View Water Bill");
 		JButton exitLoginJButton = new JButton("Exit Login");
 		
 		// 功能按钮面板
@@ -59,8 +52,6 @@ public class ThisBankClientMenu {
 		menuJPanel.add(saveMoneyJButton);
 		menuJPanel.add(getMoneyJButton);
 		menuJPanel.add(transferMoneyJButton);
-		menuJPanel.add(changePasswordJButton);
-		menuJPanel.add(viewWaterBillJButton);
 		menuJPanel.add(new JLabel());			// 加入空组件，占用格子
 		menuJPanel.add(exitLoginJButton);
 		
@@ -73,12 +64,12 @@ public class ThisBankClientMenu {
 		verticall.add(Box.createVerticalStrut(30));			// 创建一个不可见的固定高度的组件 撑开内容
 		verticall.add(menuJPanel);
 		
-		thisBankMenuJFrame.add(verticall);
-		thisBankMenuJFrame.setLayout(new FlowLayout());
-		thisBankMenuJFrame.setVisible(true);  			 // 显示可见
-		thisBankMenuJFrame.pack();						// 调整此窗口的大小，以适合其子组件的首选大小和布局
-		thisBankMenuJFrame.setSize(500, 340);
-		thisBankMenuJFrame.setLocationRelativeTo(null);
+		otherBankMenuJFrame.add(verticall);
+		otherBankMenuJFrame.setLayout(new FlowLayout());
+		otherBankMenuJFrame.setVisible(true);  			 // 显示可见
+		otherBankMenuJFrame.pack();						// 调整此窗口的大小，以适合其子组件的首选大小和布局
+		otherBankMenuJFrame.setSize(500, 340);
+		otherBankMenuJFrame.setLocationRelativeTo(null);
 		
 		// 注册按钮监听事件
 		
@@ -89,7 +80,7 @@ public class ThisBankClientMenu {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				
-				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				otherBankMenuJFrame.setVisible(false);  // 隐藏此界面
 				// 创建余额查询界面
 				new CheckBalances(user, bankName).CheckMoneyInterface();	
 			}
@@ -101,7 +92,7 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				otherBankMenuJFrame.setVisible(false);  // 隐藏此界面
 				// 创建存钱界面
 				new SaveMoney(user, bankName).SaveMoneyInterface();
 			}
@@ -113,7 +104,7 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				otherBankMenuJFrame.setVisible(false);  // 隐藏此界面
 				// 创建取钱界面
 				new WithdrawMoney(user, bankName).outMoneyInterface();
 			}
@@ -125,33 +116,9 @@ public class ThisBankClientMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				otherBankMenuJFrame.setVisible(false);  // 隐藏此界面
 				// 创建转账界面
 				new TransferMoney(user, bankName).TransferMoneyInterface();
-			}
-		});
-		
-		// 更改密码
-		changePasswordJButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO 自动生成的方法存根
-				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
-				// 创建修改密码界面
-				new ChangePassword(user, bankName).ChangPasswordInterface();
-			}
-		});
-		
-		// 查看流水账单
-		viewWaterBillJButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO 自动生成的方法存根
-				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
-				// 创建查看流水账单界面
-				new ViewWaterBill(user, bankName).ViewWaterBillInterface();
 			}
 		});
 		
@@ -162,7 +129,7 @@ public class ThisBankClientMenu {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				AtmLoginInterfane login = new AtmLoginInterfane(bankName);
-				thisBankMenuJFrame.setVisible(false);  // 隐藏功能界面
+				otherBankMenuJFrame.setVisible(false);  // 隐藏功能界面
 				login.loginInterface();     // 显示登录界面
 			}
 		});
