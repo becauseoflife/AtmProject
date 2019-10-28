@@ -128,10 +128,10 @@ public class TransferMoney {
 				uFile.updateObjectOutputFile(user);
 				
 				// 记录用户的操作
-				String opString = "Received " + transMoney + " yuan from "+ user.getUserAccountNumber()+" User transfers";
+				String opString = "Turn into " + transMoney + " yuan";
 				uFile.saveOperationData(transferUser, opString);
 				
-				opString = "Transfer " + transMoney +" yuan to " + transferUser.getUserAccountNumber() + " User";
+				opString = "Transfer " + transMoney +" yuan";
 				uFile.saveOperationData(user, opString);
 				
 				JOptionPane.showMessageDialog(transferMoneyJFrame, "seccussed!");
