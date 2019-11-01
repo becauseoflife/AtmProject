@@ -80,6 +80,12 @@ public class WithdrawMoney {
 					return;
 				}
 				
+				// 更新用户文件 和 ATM余额文件
+				SetAndGetDataFile uFlie = new SetAndGetDataFile();
+				
+				// 获取ATM信息
+				MyAtm atm = uFlie.readObjectInputFile(bankName);
+				
 				Double outMoney = Double.valueOf(inputMoneyJTextField.getText());
 				// 判断输入取钱金额是否超过自己的余额
 				if (user.getAvailableBalances() < outMoney) {
@@ -87,17 +93,19 @@ public class WithdrawMoney {
 					inputMoneyJTextField.setText("");
 					return;
 				}
+				// 判断ATM余额是否足够
+				else if (atm.getAtmMoney() < outMoney) {
+					JOptionPane.showMessageDialog(outMoneyJFrame, "ATM balance is insufficient ! please enter again!");
+					inputMoneyJTextField.setText("");
+					return;
+				}
 				
 				// 条件都成立
-				
-				// 更新用户文件 和 ATM余额文件
-				SetAndGetDataFile uFlie = new SetAndGetDataFile();
 				
 				user.setAvailableBalances(user.getAvailableBalances() - outMoney);
 				uFlie.updateObjectOutputFile(user);
 				
-				// 获取ATM信息
-				MyAtm atm = uFlie.readObjectInputFile(bankName);
+				// 更新ATM余额
 				atm.setAtmMoney(atm.getAtmMoney() - outMoney);
 				
 				// 更新ATM信息

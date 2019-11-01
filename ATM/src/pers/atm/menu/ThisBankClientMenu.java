@@ -21,7 +21,7 @@ import pers.atm.useroperation.ChangePassword;
 import pers.atm.useroperation.CheckBalances;
 import pers.atm.useroperation.SaveMoney;
 import pers.atm.useroperation.TransferMoney;
-import pers.atm.useroperation.ViewWaterBill;
+import pers.atm.useroperation.ViewFlowBill;
 import pers.atm.useroperation.WithdrawMoney;
 
 public class ThisBankClientMenu {
@@ -49,7 +49,7 @@ public class ThisBankClientMenu {
 		JButton getMoneyJButton = new JButton("Withdraw Money");
 		JButton transferMoneyJButton = new JButton("Transfer Money");
 		JButton changePasswordJButton = new JButton("Change Password");
-		JButton viewWaterBillJButton = new JButton("View Water Bill");
+		JButton viewWaterBillJButton = new JButton("View Flow Bill");
 		JButton exitLoginJButton = new JButton("Exit Login");
 		
 		// 功能按钮面板
@@ -151,7 +151,7 @@ public class ThisBankClientMenu {
 				// TODO 自动生成的方法存根
 				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
 				// 创建查看流水账单界面
-				new ViewWaterBill(user, bankName).ViewWaterBillInterface();
+				new ViewFlowBill(user, bankName).ViewWaterBillInterface();
 			}
 		});
 		
