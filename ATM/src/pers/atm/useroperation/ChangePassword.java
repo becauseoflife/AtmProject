@@ -31,11 +31,11 @@ public class ChangePassword {
 	}
 	
 	public void ChangPasswordInterface() {
-		changePsdJFrame = new JFrame(user.getUserAccountNumber() + "ChangePassword");
+		changePsdJFrame = new JFrame(user.getUserAccountNumber() + " ChangePassword");
 		changePsdJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		// 用户原密码
-		JPanel useroldpasswordJPanel = new JPanel();
+		JPanel useroldpasswordJPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JTextField userOldPassword = new JTextField(20);
 		JLabel userOldpsdJLabel = new JLabel("Old Password:", JLabel.CENTER);
 		userOldpsdJLabel.setPreferredSize(new Dimension(120, 20));
@@ -43,7 +43,7 @@ public class ChangePassword {
 		useroldpasswordJPanel.add(userOldPassword);
 		
 		// 用户新密码
-		JPanel userNewPasswordJPanel = new JPanel();
+		JPanel userNewPasswordJPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JPasswordField userNewPassword = new JPasswordField(20);
 		JLabel userNewPasswordJLabel = new JLabel("New Password:", JLabel.CENTER);
 		userNewPasswordJLabel.setPreferredSize(new Dimension(120, 20));
@@ -51,9 +51,9 @@ public class ChangePassword {
 		userNewPasswordJPanel.add(userNewPassword);
 		
 		// 再次确认新密码
-		JPanel userNewPasswordAgainJPanel = new JPanel();
+		JPanel userNewPasswordAgainJPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JPasswordField userNewPasswordAgain = new JPasswordField(20);
-		JLabel userNewPasswordAgainJLabel = new JLabel("New Password Again:", JLabel.CENTER);
+		JLabel userNewPasswordAgainJLabel = new JLabel("Confirm new password:", JLabel.CENTER);
 		userNewPasswordAgainJPanel.add(userNewPasswordAgainJLabel);
 		userNewPasswordAgainJPanel.add(userNewPasswordAgain);
 		
@@ -92,15 +92,15 @@ public class ChangePassword {
 				// TODO 自动生成的方法存根
 				// 检查用户是否输入为空 
 				if (userOldPassword.getText().equals("")) {
-					JOptionPane.showMessageDialog(changePsdJFrame, "请输入原密码！");
+					JOptionPane.showMessageDialog(changePsdJFrame, "Please input the original password!");
 					return;
 				}
 				else if (userNewPassword.getPassword().equals("")) {
-					JOptionPane.showMessageDialog(changePsdJFrame, "请输入新密码！");
+					JOptionPane.showMessageDialog(changePsdJFrame, "Please enter a new password!");
 					return;
 				}
 				else if (userNewPasswordAgain.getPassword().equals("")) {
-					JOptionPane.showMessageDialog(changePsdJFrame, "请再次确认密码！");
+					JOptionPane.showMessageDialog(changePsdJFrame, "Please confirm the new password again!");
 					return;
 				}
 				
@@ -109,14 +109,14 @@ public class ChangePassword {
 				
 				// 判断原密码输入是否正确
 				if (!user.getUserPassword().equals(userOldPassword.getText())) {
-					JOptionPane.showMessageDialog(changePsdJFrame, "原密码错误！请重新输入！");
+					JOptionPane.showMessageDialog(changePsdJFrame, "The original password is wrong! Please re-enter!");
 					userOldPassword.setText("");
 					return;
 				}
 				
 				// 判断原密码是否和新密码一样
 				if (String.valueOf(newPasswordString).equals(userOldPassword.getText())) {
-					JOptionPane.showMessageDialog(changePsdJFrame, "原密码和新密码不能相同！请重新输入！");
+					JOptionPane.showMessageDialog(changePsdJFrame, "The original password and the new password cannot be the same!\n Please re-enter!");
 					userNewPassword.setText("");
 					userNewPasswordAgain.setText("");
 					return;
@@ -132,13 +132,13 @@ public class ChangePassword {
 					uFlie.updateObjectOutputFile(user);
 					
 					// 成功并返回
-					JOptionPane.showMessageDialog(changePsdJFrame, "更改成功！");
+					JOptionPane.showMessageDialog(changePsdJFrame, "Change succeeded!");
 					changePsdJFrame.setVisible(false);  // 隐藏此界面
 					// 返回操作界面
 					new ThisBankClientMenu(user, bankName).setThisBankMenu();
 					
 				}else{
-					JOptionPane.showMessageDialog(changePsdJFrame, "两次输入的密码不一样！请重新输入！");
+					JOptionPane.showMessageDialog(changePsdJFrame, "The two passwords are different! Please re-enter!");
 					userNewPassword.setText("");
 					userNewPasswordAgain.setText("");
 					return;

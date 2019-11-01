@@ -3,6 +3,8 @@ package pers.atm.useroperation;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -15,6 +17,7 @@ import javax.swing.WindowConstants;
 
 import pers.atm.menu.OtherBankClientMenu;
 import pers.atm.menu.ThisBankClientMenu;
+import pers.atm.printcopy.PrintCopy;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
 import pers.atm.user.User;
 import pers.atm.useroperation.inputlimitclass.NumberLenghtLimitedDmt;
@@ -134,15 +137,34 @@ public class TransferMoney {
 				opString = "Transfer " + transMoney +" yuan to " + transferUser.getUserAccountNumber();
 				uFile.saveOperationData(user, opString);
 				
+				// 提示成功
 				JOptionPane.showMessageDialog(transferMoneyJFrame, "seccussed!");
+				
+				// 获取存钱的时间 打印副本需要的时间
+				SimpleDateFormat operationData = new SimpleDateFormat("yy-MM-dd HH:mm:ss");	//时间格式
+				Date newData = new Date();			//当前时间
+				String datasString = operationData.format(newData);		//处理当前时间格式
+				
+				// 打印副本的内容
+				String printCopyContextString = "\t" + user.getBankName() + " of User\n" +
+												"Account Number:\t" 			+ user.getUserAccountNumber()    + "\n" +
+												"Transfer amount:\t" 			+ transMoney				     + "\n" +
+												"Transfer To User Account:\t"	+ transferUser.getUserAccountNumber()+ "\n"+
+												"Available Account Balance:\t" 	+ user.getAvailableBalances()	 + "\n" +
+												"Unavailable Account Balance:\t"+ user.getUnavailableBlances()	 + "\n" +
+												"Operating Time:\t" 			+ datasString;
+				
+				// 打开打印界面
 				transferMoneyJFrame.setVisible(false); //隐藏此界面
-
-				// 返回操作界面
+				new PrintCopy(user, bankName, printCopyContextString).printCopyInterface();
+				
+				
+/*				// 返回操作界面
 				if (user.getBankName().equals(bankName)) {
 					new ThisBankClientMenu(user, bankName).setThisBankMenu();	// 本银行操作界面
 				}else {
 					new OtherBankClientMenu(user, bankName).setOtherBankMenu(); // 其他银行操作界面
-				}
+				}*/
 
 			}
 		});

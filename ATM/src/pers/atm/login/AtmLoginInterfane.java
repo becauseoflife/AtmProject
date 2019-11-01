@@ -43,7 +43,7 @@ public class AtmLoginInterfane {
 	// 用户登录界面
 	public void loginInterface()
 	{
-		loginJFrame = new JFrame("登录ATM"); 
+		loginJFrame = new JFrame("Login ATM"); 
 		loginJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		// 登录logo
@@ -100,11 +100,11 @@ public class AtmLoginInterfane {
 				
 				// 判断用户输入是否为空
 				if (inputAccuontString.equals("")) {
-					JOptionPane.showMessageDialog(loginJFrame, "请输入账号！");
+					JOptionPane.showMessageDialog(loginJFrame, "Please enter your account number!");
 					return;
 				}
 				else if (inputPasswordString.equals("")) {
-					JOptionPane.showMessageDialog(loginJFrame, "请输入密码！");
+					JOptionPane.showMessageDialog(loginJFrame, "Please input a password!");
 					return;
 				}
 				
@@ -115,14 +115,15 @@ public class AtmLoginInterfane {
 				
 				// 用户不存在 或者 授权人员是否存在
 				if (uFile.readUserInputFile(inputAccuontString) == null && uFile.readBankStaffInputFile(inputAccuontString) == null) {
-					JOptionPane.showMessageDialog(loginJFrame, "账号不存在，请先注册！");
+					JOptionPane.showMessageDialog(loginJFrame, "Account does not exist, please register first!");
 					// 账号密码输入框置空
 					userAccount.setText("");
 					userPassword.setText("");
 					return;
 				}
+				
 				// 账号与授权人员账号匹配
-				else if (uFile.readBankStaffInputFile(inputAccuontString) != null){
+				if (uFile.readBankStaffInputFile(inputAccuontString) != null){
 					// 打开文件
 					AuthorizedBankStaff staff = uFile.readBankStaffInputFile(inputAccuontString); 
 					// 检查密码
@@ -132,25 +133,25 @@ public class AtmLoginInterfane {
 						new BankStaffOperationMenu(staff, bankName).setBankStaffOperationMenu();
 					}else {
 						// 密码错误
-						JOptionPane.showMessageDialog(loginJFrame, "密码错误，请重新输入！");
+						JOptionPane.showMessageDialog(loginJFrame, "Password error, please re-enter!");
 						userPassword.setText(""); // 将密码输入框置空
 						return;
 					}
 				}
-				// 检查用户密码是否正确
-				else if (uFile.readUserInputFile(inputAccuontString) != null) 
+				
+				// 输入账号与用户账号匹配
+				if (uFile.readUserInputFile(inputAccuontString) != null) 
 				{
 					// 打开文件
-					User user =  uFile.readUserInputFile(inputPasswordString);
+					User user =  uFile.readUserInputFile(inputAccuontString);
 					
 					// System.out.println("用户的账号： " + user.getUserAccountNumber());
 					// System.out.println("用户的密码：" + user.getUserPassword());
 					// System.out.println("用户输入的密码：" + String.valueOf(userPassword.getPassword()));
 					
 					// 获取用户输入的密码进行比较
-					
 					if (String.valueOf(userPassword.getPassword()).equals(user.getUserPassword())) {
-						JOptionPane.showMessageDialog(loginJFrame, "登录成功");
+						JOptionPane.showMessageDialog(loginJFrame, "Login successfully!");
 						// 账号密码输入框置空
 						userAccount.setText("");
 						userPassword.setText("");
@@ -165,14 +166,14 @@ public class AtmLoginInterfane {
 							// 创建非本银行人员的用户界面
 							new OtherBankClientMenu(user, bankName).setOtherBankMenu();
 						}
-						
-						
 					}else {
-						JOptionPane.showMessageDialog(loginJFrame, "密码错误，请重新输入！");
+						JOptionPane.showMessageDialog(loginJFrame, "Password error, please re-enter!");
 						userPassword.setText(""); // 将密码输入框置空
 						return;
 					}
 				}
+				
+				
 			}
 		});
 		
@@ -183,10 +184,10 @@ public class AtmLoginInterfane {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				loginJFrame.setVisible(false); 			// 登录界面消失
-				AtmRegisteredInterface registeredInterface = new AtmRegisteredInterface(bankName);		  // 创建注册界面
+				new AtmRegisteredInterface(bankName).registeredInterface();		  // 创建注册界面
 				// registeredInterface.bankName = getBankName();   // 银行名称传给注册界面
 				// registeredInterface.carId = getCardId();		// 银行注册卡号传给注册界面
-				registeredInterface.registeredInterface();		// 展示用户登录界面
+						// 展示用户登录界面
 				
 			}
 		});

@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
@@ -15,7 +16,7 @@ import javax.swing.WindowConstants;
 import pers.atm.menu.BankStaffOperationMenu;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
 import pers.atm.user.AuthorizedBankStaff;
-import pers.atm.user.MyAtm;
+import pers.atm.user.Atm;
 
 public class CheckAtmBalance {
 	private JFrame checkAtmBalancesJFrame;
@@ -32,14 +33,14 @@ public class CheckAtmBalance {
 	{
 		// 获取ATM信息
 		SetAndGetDataFile atmFile = new SetAndGetDataFile();
-		MyAtm atm  = atmFile.readObjectInputFile(bankName);
+		Atm atm  = atmFile.readObjectInputFile(bankName);
 		
 		checkAtmBalancesJFrame = new JFrame(bankStaff.getBankStaffId() + " CheckBanlances");
 		checkAtmBalancesJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		// 授权人员id显示
 		JPanel bankStaffNameJPanel = new JPanel();
-		bankStaffNameJPanel.add(new JLabel("员工号：" + bankStaff.getBankStaffId()));
+		bankStaffNameJPanel.add(new JLabel("Authorized person Id：" + bankStaff.getBankStaffId()));
 		
 		// ATM余额和打印纸显示
 		JPanel atmMoneyInfoJPanel = new JPanel();
@@ -80,7 +81,24 @@ public class CheckAtmBalance {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
-				
+				// 判断打印纸是否足够
+				if (atm.getAtmPaper() > 0) {
+					// 更新ATM机的打印纸
+					atm.setAtmPaper(atm.getAtmPaper() - 1);
+					
+					// 更新ATM文件
+					atmFile.updateObjectOutputFile(atm);
+					
+					// 提示成功信息
+					JOptionPane.showMessageDialog(null, "Print successfully!");
+					
+					checkAtmBalancesJFrame.setVisible(false); // 隐藏当前窗口
+					// 返回操作界面
+					new BankStaffOperationMenu(bankStaff, bankName).setBankStaffOperationMenu();
+				}else {
+					// 提示打印纸不足 不能打印
+					JOptionPane.showMessageDialog(null, "Sorry, No paper!");
+				}
 			}
 		});
 		

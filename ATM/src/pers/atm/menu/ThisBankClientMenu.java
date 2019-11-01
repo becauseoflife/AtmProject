@@ -15,7 +15,7 @@ import javax.swing.WindowConstants;
 
 import pers.atm.login.AtmLoginInterfane;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
-import pers.atm.user.MyAtm;
+import pers.atm.user.Atm;
 import pers.atm.user.User;
 import pers.atm.useroperation.ChangePassword;
 import pers.atm.useroperation.CheckBalances;

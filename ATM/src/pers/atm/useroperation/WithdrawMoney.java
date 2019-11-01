@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -15,8 +17,9 @@ import javax.swing.WindowConstants;
 
 import pers.atm.menu.OtherBankClientMenu;
 import pers.atm.menu.ThisBankClientMenu;
+import pers.atm.printcopy.PrintCopy;
 import pers.atm.setgetuserfile.SetAndGetDataFile;
-import pers.atm.user.MyAtm;
+import pers.atm.user.Atm;
 import pers.atm.user.User;
 import pers.atm.useroperation.inputlimitclass.NumberLenghtLimitedDmt;
 
@@ -76,7 +79,7 @@ public class WithdrawMoney {
 				// TODO 自动生成的方法存根
 				// 判断用户是否输入
 				if (inputMoneyJTextField.getText().equals("")) {
-					JOptionPane.showMessageDialog(outMoneyJFrame, "请输入金额！");
+					JOptionPane.showMessageDialog(outMoneyJFrame, "Please enter the amount!");
 					return;
 				}
 				
@@ -84,7 +87,7 @@ public class WithdrawMoney {
 				SetAndGetDataFile uFlie = new SetAndGetDataFile();
 				
 				// 获取ATM信息
-				MyAtm atm = uFlie.readObjectInputFile(bankName);
+				Atm atm = uFlie.readObjectInputFile(bankName);
 				
 				Double outMoney = Double.valueOf(inputMoneyJTextField.getText());
 				// 判断输入取钱金额是否超过自己的余额
@@ -96,6 +99,13 @@ public class WithdrawMoney {
 				// 判断ATM余额是否足够
 				else if (atm.getAtmMoney() < outMoney) {
 					JOptionPane.showMessageDialog(outMoneyJFrame, "ATM balance is insufficient ! please enter again!");
+					inputMoneyJTextField.setText("");
+					return;
+				}
+				
+				// 判断是否为零
+				if (outMoney == 0) {
+					JOptionPane.showMessageDialog(null, "Cannot enter 0, please enter amount!");
 					inputMoneyJTextField.setText("");
 					return;
 				}
@@ -115,15 +125,32 @@ public class WithdrawMoney {
 				String opString = "Take out " + outMoney + " yuan";
 				uFlie.saveOperationData(user, opString);
 				
+				// 提示成功
 				JOptionPane.showMessageDialog(outMoneyJFrame, "Successed!");
+				
+				// 获取存钱的时间 打印副本需要的时间
+				SimpleDateFormat operationData = new SimpleDateFormat("yy-MM-dd HH:mm:ss");	//时间格式
+				Date newData = new Date();			//当前时间
+				String datasString = operationData.format(newData);		//处理当前时间格式
+				
+				// 打印副本的内容
+				String printCopyContextString = "\t" + user.getBankName() + " of User\n" +
+												"Account Number:\t" 			+ user.getUserAccountNumber()    + "\n" +
+												"Take Out:\t\t" 			+ outMoney						 + "\n" +
+												"Available Account Balance:\t" 	+ user.getAvailableBalances()	 + "\n" +
+												"Unavailable Account Balance:\t"+ user.getUnavailableBlances()	 + "\n" +
+												"Operating Time:\t" 			+ datasString;
+				
+				// 打开打印界面
 				outMoneyJFrame.setVisible(false);  // 隐藏此界面
-
-				// 返回操作界面
+				new PrintCopy(user, bankName, printCopyContextString).printCopyInterface();
+				
+/*				// 返回操作界面
 				if (user.getBankName().equals(bankName)) {
 					new ThisBankClientMenu(user, bankName).setThisBankMenu();	// 本银行操作界面
 				}else {
 					new OtherBankClientMenu(user, bankName).setOtherBankMenu(); // 其他银行操作界面
-				}
+				}*/
 			}
 		});
 		
