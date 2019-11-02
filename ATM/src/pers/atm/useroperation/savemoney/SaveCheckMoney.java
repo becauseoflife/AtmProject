@@ -137,7 +137,7 @@ public class SaveCheckMoney {
 				SetAndGetDataFile updateFile = new SetAndGetDataFile();
 				updateFile.updateObjectOutputFile(user);
 				
-				String opString = "Deposit "+ checkMoney +" yuan in Check";
+				String opString = "Deposit "+ checkMoney +" in Check";
 				updateFile.saveOperationData(user, opString);
 
 				// 提示成功

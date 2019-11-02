@@ -61,7 +61,7 @@ public class ViewFlowBill {
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
 		// 水平隐藏
 		scroll.setHorizontalScrollBarPolicy( 
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		userMoneyInfoJPanel.add(scroll);
 		// 返回和打印按钮
@@ -83,7 +83,7 @@ public class ViewFlowBill {
 		viewWaterBillJFrame.add(verticall);
 		viewWaterBillJFrame.setVisible(true);				// 显示可见
 		viewWaterBillJFrame.pack();  	 			// 调整此窗口的大小，以适合其子组件的首选大小和布局
-		viewWaterBillJFrame.setSize(600, 350);				// 界面大小设置
+		viewWaterBillJFrame.setSize(600, 370);				// 界面大小设置
 		viewWaterBillJFrame.setLocationRelativeTo(null);
 		
 		// 按钮监听事件

@@ -141,7 +141,7 @@ public class SaveCashMoney {
 				updateFile.updateObjectOutputFile(atm);
 				
 				// 保存操作信息
-				String opString = "Deposit "+ cashMoney +" yuan in Cash";
+				String opString = "Deposit "+ cashMoney +" in Cash";
 				updateFile.saveOperationData(user, opString);
 
 				// 提示成功

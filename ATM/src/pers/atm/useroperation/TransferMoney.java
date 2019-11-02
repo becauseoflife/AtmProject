@@ -157,10 +157,10 @@ public class TransferMoney {
 				uFile.updateObjectOutputFile(user);
 				
 				// 记录用户的操作
-				String opString = "Receive " + transMoney + " yuan form " + user.getUserAccountNumber();
+				String opString = "Receive " + transMoney + " form " + user.getUserAccountNumber();
 				uFile.saveOperationData(transferUser, opString);
 				
-				opString = "Transfer " + transMoney +" yuan to " + transferUser.getUserAccountNumber();
+				opString = "Transfer " + transMoney +" to " + transferUser.getUserAccountNumber();
 				uFile.saveOperationData(user, opString);
 				
 				// 提示成功
