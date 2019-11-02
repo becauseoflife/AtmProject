@@ -1,6 +1,7 @@
 package pers.atm.useroperation;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -47,7 +48,7 @@ public class CheckBalances {
 		JPanel userMoneyInfoJPanel = new JPanel();
 		JTextArea userMoneyInfoJTextArea = new JTextArea(8, 30);
 		
-		String userMoneyInfoString = "\n\nYour Account number：\t\t" + user.getUserAccountNumber() + "\n" +
+		String userMoneyInfoString = "\n\nYour Account number:\t" + user.getUserAccountNumber() + "\n" +
 								"Available balance:\t"	 + user.getAvailableBalances() + "\n" +
 								"The unusable balance is:\t" + user.getUnavailableBlances() + "\n" ;
 		
@@ -56,7 +57,7 @@ public class CheckBalances {
 		userMoneyInfoJPanel.add(userMoneyInfoJTextArea);
 		
 		// 返回和打印按钮
-		JPanel buttonJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		JPanel buttonJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton printJButton = new JButton("Print");
 		JButton backJButton = new JButton("Back");
 		buttonJPanel.add(printJButton);
@@ -66,6 +67,7 @@ public class CheckBalances {
 		
 		verticall.add(userNameJPanel);
 		verticall.add(userMoneyInfoJPanel);
+		verticall.add(Box.createVerticalStrut(30));
 		verticall.add(buttonJPanel);
 		
 		

@@ -1,6 +1,7 @@
 package pers.atm.bankstaffoparetion;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,12 +45,30 @@ public class PutMoneyIntoAtm {
 		cashDepsitJPanel.add(new Label("Please enter the amount to be deposited:"));
 		JTextField inputMoneyJTextField = new JTextField(15);
 		
-		inputMoneyJTextField.setDocument(new NumberLenghtLimitedDmt(10));
+		inputMoneyJTextField.setDocument(new NumberLenghtLimitedDmt(8));
 		
 		cashDepsitJPanel.add(inputMoneyJTextField);
 		
+		// 设置便捷输入按钮
+		JPanel inputBtnJPanel = new JPanel(new GridLayout(2, 3, 10, 10));
+		String buttonNameString[] = { "10000", "20000", "30000", "50000", "80000", "100000" };
+		
+		JButton buttons[] = new JButton[buttonNameString.length];
+		for (int i = 0; i < buttonNameString.length; i++) {
+			buttons[i] = new JButton(buttonNameString[i]);
+			buttons[i].addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO 自动生成的方法存根
+					inputMoneyJTextField.setText(e.getActionCommand());
+				}
+			});
+			inputBtnJPanel.add(buttons[i]);
+		}
+		
 		// 确认和返回按钮
-		JPanel buttonJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		JPanel buttonJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton okJButton = new JButton("OK");
 		JButton backJButton = new JButton("Back");
 		buttonJPanel.add(okJButton);
@@ -57,9 +76,11 @@ public class PutMoneyIntoAtm {
 		
 		Box verticall = Box.createVerticalBox();
 		
-		verticall.add(Box.createVerticalStrut(50));
+		verticall.add(Box.createVerticalStrut(30));
 		verticall.add(cashDepsitJPanel);
-		verticall.add(Box.createVerticalStrut(20));
+		verticall.add(Box.createVerticalStrut(30));
+		verticall.add(inputBtnJPanel);
+		verticall.add(Box.createVerticalStrut(50));
 		verticall.add(buttonJPanel);
 		
 		
@@ -86,6 +107,12 @@ public class PutMoneyIntoAtm {
 				// 判断是否输入为0
 				if (cashMoney == 0) {
 					JOptionPane.showMessageDialog(null, "Cannot enter 0, please enter amount!");
+					inputMoneyJTextField.setText("");
+					return;
+				}
+				// 判断输入是否为整百
+				if (cashMoney % 100 != 0) {
+					JOptionPane.showMessageDialog(null, "Can only enter a whole hundred numbers! Please re-enter!");
 					inputMoneyJTextField.setText("");
 					return;
 				}

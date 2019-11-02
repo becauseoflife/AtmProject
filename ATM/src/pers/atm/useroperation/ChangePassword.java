@@ -2,6 +2,7 @@ package pers.atm.useroperation;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -58,7 +59,7 @@ public class ChangePassword {
 		userNewPasswordAgainJPanel.add(userNewPasswordAgain);
 		
 		// 提交 和 取消按钮
-		JPanel btnJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		JPanel btnJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton okButton = new JButton("Change");
 		JButton cancleButton = new JButton("Cancle");
 		btnJPanel.add(okButton);
@@ -73,7 +74,7 @@ public class ChangePassword {
 		verticall.add(userNewPasswordJPanel);
 		verticall.add(Box.createVerticalStrut(10));
 		verticall.add(userNewPasswordAgainJPanel);
-		verticall.add(Box.createVerticalStrut(20));
+		verticall.add(Box.createVerticalStrut(40));
 		verticall.add(btnJPanel);
 		
 		changePsdJFrame.setLayout(new FlowLayout(FlowLayout.CENTER));		// 设置流式布局

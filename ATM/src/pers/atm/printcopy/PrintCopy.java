@@ -1,6 +1,7 @@
 package pers.atm.printcopy;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -74,7 +75,7 @@ public class PrintCopy {
 		printCopyInfoJPanel.add(printInfoInfoJTextArea);
 		
 		// 返回和打印按钮
-		JPanel buttonJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		JPanel buttonJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton printJButton = new JButton("Print");
 		JButton cancleJButton = new JButton("Cancle");
 		buttonJPanel.add(printJButton);
@@ -84,6 +85,7 @@ public class PrintCopy {
 		
 		verticall.add(infoJPanel);
 		verticall.add(printCopyInfoJPanel);
+		verticall.add(Box.createVerticalStrut(30));
 		verticall.add(buttonJPanel);
 		
 		
@@ -91,7 +93,7 @@ public class PrintCopy {
 		printCopyJFrame.add(verticall);
 		printCopyJFrame.setVisible(true);				// 显示可见
 		printCopyJFrame.pack();  	 			// 调整此窗口的大小，以适合其子组件的首选大小和布局
-		printCopyJFrame.setSize(550, 360);				// 界面大小设置
+		printCopyJFrame.setSize(550, 370);				// 界面大小设置
 		printCopyJFrame.setLocationRelativeTo(null);
 		
 		// 按钮监听事件

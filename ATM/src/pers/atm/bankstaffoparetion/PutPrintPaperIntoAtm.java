@@ -1,6 +1,7 @@
 package pers.atm.bankstaffoparetion;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,12 +45,30 @@ public class PutPrintPaperIntoAtm {
 		outPaperJPanel.add(new Label("Please enter the paper to be stored:"));
 		JTextField inputPaperJTextField = new JTextField(15);
 		
-		inputPaperJTextField.setDocument(new NumberLenghtLimitedDmt(8));
+		inputPaperJTextField.setDocument(new NumberLenghtLimitedDmt(6));
 		
 		outPaperJPanel.add(inputPaperJTextField);
 		
+		// 设置便捷输入按钮
+		JPanel inputBtnJPanel = new JPanel(new GridLayout(2, 3, 10, 10));
+		String buttonNameString[] = { "100", "200", "300", "500", "800", "1000" };
+		
+		JButton buttons[] = new JButton[buttonNameString.length];
+		for (int i = 0; i < buttonNameString.length; i++) {
+			buttons[i] = new JButton(buttonNameString[i]);
+			buttons[i].addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO 自动生成的方法存根
+					inputPaperJTextField.setText(e.getActionCommand());
+				}
+			});
+			inputBtnJPanel.add(buttons[i]);
+		}
+		
 		// 确认和返回按钮
-		JPanel buttonJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		JPanel buttonJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton okJButton = new JButton("OK");
 		JButton backJButton = new JButton("Back");
 		buttonJPanel.add(okJButton);
@@ -57,9 +76,11 @@ public class PutPrintPaperIntoAtm {
 		
 		Box verticall = Box.createVerticalBox();
 		
-		verticall.add(Box.createVerticalStrut(50));
+		verticall.add(Box.createVerticalStrut(30));
 		verticall.add(outPaperJPanel);
-		verticall.add(Box.createVerticalStrut(20));
+		verticall.add(Box.createVerticalStrut(30));
+		verticall.add(inputBtnJPanel);
+		verticall.add(Box.createVerticalStrut(50));
 		verticall.add(buttonJPanel);
 		
 		

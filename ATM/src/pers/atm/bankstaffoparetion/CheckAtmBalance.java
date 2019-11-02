@@ -1,6 +1,7 @@
 package pers.atm.bankstaffoparetion;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -54,7 +55,7 @@ public class CheckAtmBalance {
 		atmMoneyInfoJPanel.add(atmMoneyInfoJTextArea);
 		
 		// 返回和打印按钮
-		JPanel buttonJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		JPanel buttonJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton printJButton = new JButton("Print");
 		JButton backJButton = new JButton("Back");
 		buttonJPanel.add(printJButton);
@@ -64,6 +65,7 @@ public class CheckAtmBalance {
 		
 		verticall.add(bankStaffNameJPanel);
 		verticall.add(atmMoneyInfoJPanel);
+		verticall.add(Box.createVerticalStrut(30));
 		verticall.add(buttonJPanel);
 		
 		
