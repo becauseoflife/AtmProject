@@ -105,7 +105,7 @@ public class BankStaffOperationMenu {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				bankStaffOperationMenuJFrame.setVisible(false);  // 隐藏此界面
-				new PutPrintPaperIntoAtm(bankStaff, bankName).putMoneyIntoAtmInterface();
+				new PutPrintPaperIntoAtm(bankStaff, bankName).putPaperIntoAtmInterface();
 			}
 		});
 		
@@ -117,7 +117,7 @@ public class BankStaffOperationMenu {
 				// TODO 自动生成的方法存根
 				bankStaffOperationMenuJFrame.setVisible(false);  // 隐藏此界面
 				// 查看操作记录界面
-				new ViewOperationRecord(bankStaff, bankName).ViewWaterBillInterface();
+				new ViewOperationRecord(bankStaff, bankName).viewOperationsInterface();
 			}
 		});
 		

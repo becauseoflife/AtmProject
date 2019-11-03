@@ -19,6 +19,7 @@ import pers.atm.user.Atm;
 import pers.atm.user.User;
 import pers.atm.useroperation.ChangePassword;
 import pers.atm.useroperation.CheckBalances;
+import pers.atm.useroperation.LoansAndRepayments;
 import pers.atm.useroperation.SaveMoney;
 import pers.atm.useroperation.TransferMoney;
 import pers.atm.useroperation.ViewFlowBill;
@@ -50,6 +51,7 @@ public class ThisBankClientMenu {
 		JButton transferMoneyJButton = new JButton("Transfer Money");
 		JButton changePasswordJButton = new JButton("Change Password");
 		JButton viewWaterBillJButton = new JButton("View Flow Bill");
+		JButton loanJButton = new JButton("Loans and repayments");
 		JButton exitLoginJButton = new JButton("Exit Login");
 		
 		// 功能按钮面板
@@ -61,7 +63,7 @@ public class ThisBankClientMenu {
 		menuJPanel.add(transferMoneyJButton);
 		menuJPanel.add(changePasswordJButton);
 		menuJPanel.add(viewWaterBillJButton);
-		menuJPanel.add(new JLabel());			// 加入空组件，占用格子
+		menuJPanel.add(loanJButton);			
 		menuJPanel.add(exitLoginJButton);
 		
 		menuJPanel.setLayout(new GridLayout(4, 2, 30, 30));
@@ -152,6 +154,18 @@ public class ThisBankClientMenu {
 				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
 				// 创建查看流水账单界面
 				new ViewFlowBill(user, bankName).ViewWaterBillInterface();
+			}
+		});
+		
+		// 贷款和还款
+		loanJButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO 自动生成的方法存根
+				thisBankMenuJFrame.setVisible(false);  // 隐藏此界面
+				// 创建贷款和还款界面
+				new LoansAndRepayments(user, bankName).loansAndRepaymentsInterface();
 			}
 		});
 		

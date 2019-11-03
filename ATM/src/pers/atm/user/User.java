@@ -12,6 +12,8 @@ public class User implements Serializable{
 	private String userPassword;			// 用户密码
 	private Double availableBalances;	// 用户可用余额
 	private Double unAvailableBlances;	// 不可用余额
+	private Double loanLimit;  			// 贷款的额度
+	private Double repaymentAmount;		// 还款的数量
 	
 	public User(){};
 	
@@ -24,6 +26,8 @@ public class User implements Serializable{
 		this.userPassword = userPassword;
 		this.availableBalances = availableBalances;
 		this.unAvailableBlances = unavailableBlances;
+		this.loanLimit = 3000.0;
+		this.repaymentAmount = 0.0;
 	}
 
 	public String getBankName() {
@@ -74,8 +78,24 @@ public class User implements Serializable{
 		unAvailableBlances = unavailableBlances;
 	}
 	
+	public Double getLoanLimit() {
+		return loanLimit;
+	}
+
+	public void setLoanLimit(Double loanLimit) {
+		this.loanLimit = loanLimit;
+	}
+
+	public Double getRepaymentAmount() {
+		return repaymentAmount;
+	}
+
+	public void setRepaymentAmount(Double repaymentAmount) {
+		this.repaymentAmount = repaymentAmount;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 }

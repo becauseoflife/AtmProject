@@ -77,7 +77,7 @@ public class PrintCopy {
 		// 返回和打印按钮
 		JPanel buttonJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton printJButton = new JButton("Print");
-		JButton cancleJButton = new JButton("Cancle");
+		JButton cancleJButton = new JButton("Cancel");
 		buttonJPanel.add(printJButton);
 		buttonJPanel.add(cancleJButton);
 		

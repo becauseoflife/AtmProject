@@ -61,7 +61,7 @@ public class ChangePassword {
 		// 提交 和 取消按钮
 		JPanel btnJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton okButton = new JButton("Change");
-		JButton cancleButton = new JButton("Cancle");
+		JButton cancleButton = new JButton("Cancel");
 		btnJPanel.add(okButton);
 		btnJPanel.add(cancleButton);
 		

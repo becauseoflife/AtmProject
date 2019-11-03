@@ -92,8 +92,8 @@ public class AtmRegisteredInterface {
 		
 		// 提交 和 取消按钮
 		JPanel btnJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
-		JButton okButton = new JButton("ok");
-		JButton cancleButton = new JButton("cancle");
+		JButton okButton = new JButton("Ok");
+		JButton cancleButton = new JButton("Cancel");
 		btnJPanel.add(okButton);
 		btnJPanel.add(cancleButton);
 		

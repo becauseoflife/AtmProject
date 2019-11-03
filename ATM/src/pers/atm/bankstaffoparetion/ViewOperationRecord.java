@@ -33,7 +33,7 @@ public class ViewOperationRecord {
 		this.bankName = bankName;
 	}
 
-	public void ViewWaterBillInterface()
+	public void viewOperationsInterface()
 	{	
 		operationRecordJFrame = new JFrame(bankStaff.getBankStaffId() + " View Operation record");
 		operationRecordJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

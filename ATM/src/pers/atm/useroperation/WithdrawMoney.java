@@ -70,7 +70,7 @@ public class WithdrawMoney {
 		// 确认和返回按钮
 		JPanel buttonJPanel = new JPanel(new GridLayout(1, 2, 20, 10));
 		JButton withdrawalJButton = new JButton("withdrawal");
-		JButton backJButton = new JButton("Cancle");
+		JButton backJButton = new JButton("Cancel");
 		buttonJPanel.add(withdrawalJButton);
 		buttonJPanel.add(backJButton);
 		

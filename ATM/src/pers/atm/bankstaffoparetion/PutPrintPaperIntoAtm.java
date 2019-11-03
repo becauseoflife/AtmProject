@@ -35,7 +35,7 @@ public class PutPrintPaperIntoAtm {
 	}
 
 	// 现金存款界面
-	public void putMoneyIntoAtmInterface()
+	public void putPaperIntoAtmInterface()
 	{
 		putPrintPaperIntoAtmJFrame = new JFrame(bankStaff.getBankStaffId() + " Put Print Paper");
 		putPrintPaperIntoAtmJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

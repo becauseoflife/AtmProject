@@ -50,7 +50,8 @@ public class CheckBalances {
 		
 		String userMoneyInfoString = "\n\nYour Account number:\t" + user.getUserAccountNumber() + "\n" +
 								"Available balance:\t"	 + user.getAvailableBalances() + "\n" +
-								"The unusable balance is:\t" + user.getUnavailableBlances() + "\n" ;
+								"Unusable balance:\t" + user.getUnavailableBlances() + "\n" +
+								"Repayment amount:\t" + user.getRepaymentAmount();
 		
 		userMoneyInfoJTextArea.setText(userMoneyInfoString);
 		userMoneyInfoJTextArea.setEditable(false);
